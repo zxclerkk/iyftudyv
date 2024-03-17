@@ -1,0 +1,30 @@
+#include  <Servo.h>  
+Servo servo_h;         
+Servo servo_v;
+
+unsigned long minuts = 10 * 60000;  
+unsigned long game_time;
+
+void setup() {
+   servo_h.attach(9);        
+   servo_v.attach(11);
+
+   pinMode(7, OUTPUT); 
+   digitalWrite(7, HIGH);
+
+   game_time = millis();    
+}
+
+void loop() {
+      
+   while (millis() - game_time < minuts) {
+       int horizont = random(1, 15) * 5;
+       int vertical = random(1, 15) * 2;
+       int pausa = random(5, 10) * 150;
+
+       servo_h.write(horizont);
+       servo_v.write(vertical);
+       delay(pausa);
+   }
+   digitalWrite(7, LOW);  
+}
